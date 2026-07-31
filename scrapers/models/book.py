@@ -3,9 +3,6 @@ DEV: Isaac M.D. Brown
 Last Iteration: 30/07/2026
 """
 
-
-
-
 class Book:
     """A simple model of a book"""
 
@@ -25,11 +22,24 @@ class Book:
         self.aurthor = author
         self.rating = rating
     
-    def __str__(self):
+    def __str__(self, use_title: bool = True, use_author: bool = True, use_rating: bool = True):
         """Override for __str__ method, returns a formatted str"""
-        return str(
-                f"Title: {self.title}\n" +
-                f"Author: {self.author}\n" +
-                f"Rating: {self.rating}\n"
-                )
+        book_state: str = ""
+        
+        if use_title:
+            book_state += f"Title: {self.title}"                
+        if use_author:
+            book_state += f"Author: {self.author}"
+        if use_rating:
+            book_state += f"Rating: {self.rating}"
+        
+        return book_state
+
+    def to_string(self, use_title: bool, use_author: bool, use_rating: bool):
+        """
+        Addional str method to give options on what intance variables get returned,
+        saves unessesy access to __str__
+        """
+        return self.__str__(use_title, use_author, use_rating)
+
         
