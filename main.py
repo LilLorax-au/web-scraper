@@ -1,4 +1,5 @@
-from scrapers.book_store import *
+from scrapers.services.book_store_client import BookStoreClient
+
 
 
 
@@ -7,7 +8,7 @@ CONTENT_HEAD: str = str(
         "This program is designed to run through web sites,\n" + 
         "parsing the html,\n" +
         "then doing action with the data.\n" +
-        f"The currently use case is targeted at {URL_BASE}\n\n" +
+        f"The currently use case is targeted at {BookStoreClient.BASE_URL}\n\n" +
         "Lead Dev: Isaac M.D. Brown\n" +
         "Date of last iteration: 30/07/2026\n")
 
