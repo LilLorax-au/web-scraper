@@ -19,7 +19,7 @@ class Book:
     def __init__(self, title: str = DEF_TITLE, author: str = DEF_AUTHOR, rating: str = DEF_RATING):
         """Constructor for book object"""
         self.title = title
-        self.aurthor = author
+        self.author = author
         self.rating = rating
     
     def __str__(self, use_title: bool = True, use_author: bool = True, use_rating: bool = True):
@@ -27,11 +27,11 @@ class Book:
         book_state: str = ""
         
         if use_title:
-            book_state += f"Title: {self.title}"                
+            book_state += f"Title: {self.title}\n"                
         if use_author:
-            book_state += f"Author: {self.author}"
+            book_state += f"Author: {self.author}\n"
         if use_rating:
-            book_state += f"Rating: {self.rating}"
+            book_state += f"Rating: {self.rating}\n"
         
         return book_state
 

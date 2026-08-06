@@ -14,11 +14,11 @@ class BookStoreClient:
     
     # Constants
     BASE_URL: str = "https://books.toscrape.com/"
-    # only use for decared categories
+    # only use for declared categories
     CATEGORY_ROUTE: str = "catalogue/category/books/"
     
     # use only on if scrape() has no parameter passed, is default book age
-    DEF_CATEGORY_ROUTE: str = "catalogue/category/books_1/"    
+    DEF_CATEGORY_ROUTE: str = "https://books.toscrape.com/catalogue/category/books_1/"    
      
     # Instance variables type hinting
     url: str
@@ -33,30 +33,42 @@ class BookStoreClient:
         
         while True:
             page_i += 1
+            print(page_i)
 
             if category:
-                response = requests.get(self.url + category + f"page_{page_i}")
+                response = requests.get(self.url + category + f"page-{page_i}.html")
             else:
-                response = requests.get(self.DEF_CATEGORY_ROUTE + f"page_{page_i}")
+                response = requests.get(self.DEF_CATEGORY_ROUTE + f"page-{page_i}.html")
 
             if response.status_code == 200:
-
+                
                 soup = BeautifulSoup(response.content, 'html.parser')
 
-                book_list = soup.find_all("ol.li")
+                ordered_list_block = soup.find("ol")
+
+                book_list = ordered_list_block.find_all("li")
+                
+                title: str = ''
+                rating: str = ''
                 
                 for li in book_list:
                     title_tag = li.find('h3')
                     rating_tag = li.find('p')
 
+                    if title_tag:
+                        title = title_tag.text
+
                     if rating_tag:
-                        rating_tag.get('class')
-                                
+                        rating_tag = rating_tag.get('class')
+                    if rating_tag:
+                        rating = rating_tag[-1]
+                    
                     if title_tag and rating_tag:
                         book = Book(
                             title = title_tag.text,
-                            rating = rating_tag.text
+                            rating = rating_tag[-1]
                             )
+                        print(book)
                         books.append(book)
             else:
                 if len(books) == 0:
