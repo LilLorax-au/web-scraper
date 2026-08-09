@@ -5,6 +5,7 @@ Last Iteration: 31/07/2026
 
 from bs4 import BeautifulSoup
 import requests
+from ..errors import ScrapeError
 from ..models import Book
 
 
@@ -71,10 +72,9 @@ class BookStoreClient:
                         books.append(book)
             else:
                 if len(books) == 0:
-                    raise Exception(
-                            "Error, scrape failed, " + 
-                            "response status_code: " + 
-                            str(response.status_code)
+                    raise ScrapeError(
+                            message = "Error, scrape failed",
+                            status_code = response.status_code
                             )
                 else:
                     break
