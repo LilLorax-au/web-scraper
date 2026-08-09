@@ -68,7 +68,6 @@ class BookStoreClient:
                             title = title_tag.text,
                             rating = rating_tag[-1]
                             )
-                        print(book)
                         books.append(book)
             else:
                 if len(books) == 0:
