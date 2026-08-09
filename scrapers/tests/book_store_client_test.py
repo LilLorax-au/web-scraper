@@ -1,21 +1,24 @@
 import unittest
 from ..services import BookStoreClient
+from ..errors import ScrapeError
 
 class TestBookStoreClient(unittest.TestCase):
 
-    def SetUp(self):
+    def setUp(self):
         self.book_store = BookStoreClient()
-    
-
+   
     def test_scrape_no_category(self):
         self.assertTrue(len(self.book_store.scrape()) > 0, True)
     
     def test_scrape_with_good_category(self):
-        self.assertTrue(len(self.book_store.scrape("food-and-drink_33")) > 0, True)
-        
+        good_cat_value: str = "food-and-drink_33"
+        self.assertTrue(len(self.book_store.scrape(good_cat_value)) > 0, True)
+         
     def test_scrape_with_bad_category(self):
-        with self.assertRaises(Exception):
-            pass
+        bad_cat_value: str = "food-and-drink_32"
+
+        with self.assertRaises(ScrapeError):
+            self.book_store.scrape(bad_cat_value)
                 
    
     

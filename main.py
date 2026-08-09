@@ -1,4 +1,5 @@
-from scrapers.services.book_store_client import BookStoreClient
+from scrapers.models import Book
+from scrapers.services import BookStoreClient
 
 
 
@@ -22,15 +23,32 @@ def top_and_tail_content(func):
         print(CONTENT_HEAD)
 
         a_func = func()
-        
-        print("FIN")
+                
         return a_func
     return wrapper
 
 @top_and_tail_content
 def main():
-    print("MID")
-    return None
+    
+    book_scraper = BookStoreClient()
+    
+    print("Pulling default and food and drink books, this can take a while :)", flush = True)
+    default_books = book_scraper.scrape("default_15")
+    food_drink_books = book_scraper.scrape("food-and-drink_33")
+
+    for i, book in enumerate(default_books):
+        print(f"{i}.\n{book.to_string(
+              use_title = True,
+              use_author = False,
+              use_rating = False)}", flush = True)
+
+    for i, book in enumerate(food_drink_books):
+        print(f"{i}.\n{book.to_string(
+              use_title = True,
+              use_author = False,
+              use_rating = False)}", flush = True)
+
+    return
 
 
 

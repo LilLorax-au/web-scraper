@@ -19,7 +19,7 @@ class BookStoreClient:
     CATEGORY_ROUTE: str = "catalogue/category/books/"
     
     # use only on if scrape() has no parameter passed, is default book age
-    DEF_CATEGORY_ROUTE: str = "https://books.toscrape.com/catalogue/category/books_1/"    
+    DEF_CATEGORY_ROUTE: str = "https://books.toscrape.com/catalogue/category/books_1"    
      
     # Instance variables type hinting
     url: str
@@ -34,12 +34,11 @@ class BookStoreClient:
         
         while True:
             page_i += 1
-            print(page_i)
-
+            
             if category:
-                response = requests.get(self.url + category + f"page-{page_i}.html")
+                response = requests.get(self.url + category + f"/page-{page_i}.html")
             else:
-                response = requests.get(self.DEF_CATEGORY_ROUTE + f"page-{page_i}.html")
+                response = requests.get(self.DEF_CATEGORY_ROUTE + f"/page-{page_i}.html")
 
             if response.status_code == 200:
                 
