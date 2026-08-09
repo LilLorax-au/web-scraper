@@ -40,13 +40,13 @@ def main():
         print(f"{i}.\n{book.to_string(
               use_title = True,
               use_author = False,
-              use_rating = False)}", flush = True)
+              use_rating = True)}", flush = True)
 
     for i, book in enumerate(food_drink_books):
         print(f"{i}.\n{book.to_string(
               use_title = True,
               use_author = False,
-              use_rating = False)}", flush = True)
+              use_rating = True)}", flush = True)
 
     return
 

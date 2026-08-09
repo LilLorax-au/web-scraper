@@ -1,6 +1,6 @@
 """
 DEV: Isaac M.D. Brown
-Last Iteration: 31/07/2026
+Last Iteration: 09/08/2026
 """
 
 from bs4 import BeautifulSoup
@@ -29,6 +29,7 @@ class BookStoreClient:
         self.url = self.BASE_URL + self.CATEGORY_ROUTE
     
     def scrape(self, category: str = ''):
+        """Main method, will scrape a books.toscape at the parameter category"""
         books: list[Book] = []
         page_i = 0
         
